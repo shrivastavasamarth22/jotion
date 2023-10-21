@@ -17,7 +17,7 @@ const Logo = () => {
                 alt="Logo"
             />
             <p className={cn("font-semibold", font.className)}>
-                Motion
+                Jotion
             </p>
         </div>
      );
