@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Jotion',
+  title: 'Motion',
   description: 'The connected workspace where better, faster work happens.',
   icons: {
     icon: [
