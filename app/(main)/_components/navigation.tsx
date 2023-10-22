@@ -18,6 +18,7 @@ import {
 
 import DocumentList from "./document-list";
 import Item from "./item";
+import TrashBox from "./trash-box";
 import UserItem from "./user-item";
 import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
@@ -180,7 +181,7 @@ export const Navigation = () => {
                             className="p-0 w-72"
                             side={isMobile ? "bottom" : "right"}
                         >
-                            <p>Trash box</p>
+                            <TrashBox />
                         </PopoverContent>
                     </Popover>
                 </div>
