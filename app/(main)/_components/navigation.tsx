@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsLeft, MenuIcon, PlusCircle, Search } from "lucide-react";
+import { ChevronsLeft, MenuIcon, PlusCircle, Search, Settings } from "lucide-react";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 
@@ -139,6 +139,11 @@ export const Navigation = () => {
                         label="Search"
                         icon={Search}
                         isSearch
+                        onClick={() => {}}
+                    />
+                    <Item
+                        label="Settings"
+                        icon={Settings}
                         onClick={() => {}}
                     />
                     <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
