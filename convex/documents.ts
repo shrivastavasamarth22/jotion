@@ -5,7 +5,7 @@ import { v } from "convex/values";
 
 export const archive = mutation({
     args: {
-        id: v.id("documents")
+        id: v.id("documents"),
     },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
@@ -36,23 +36,22 @@ export const archive = mutation({
 
             for (const child of children) {
                 await ctx.db.patch(child._id, {
-                    isArchived: true
+                    isArchived: true,
                 });
 
                 await recursiveArchive(child._id);
             }
-        }
+        };
 
         const document = await ctx.db.patch(args.id, {
-            isArchived: true
+            isArchived: true,
         });
 
         await recursiveArchive(args.id);
 
-
         return document;
-    }
-})
+    },
+});
 
 export const getSidebar = query({
     args: {
@@ -107,23 +106,21 @@ export const create = mutation({
 
 export const getTrash = query({
     handler: async (ctx) => {
-      const identity = await ctx.auth.getUserIdentity();
-  
-      if (!identity) {
-        throw new Error("Not authenticated");
-      }
-  
-      const userId = identity.subject;
-  
-      const documents = await ctx.db
-        .query("documents")
-        .withIndex("by_user", (q) => q.eq("userId", userId))
-        .filter((q) =>
-          q.eq(q.field("isArchived"), true),
-        )
-        .order("desc")
-        .collect();
-  
-      return documents;
-    }
-  });
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity) {
+            throw new Error("Not authenticated");
+        }
+
+        const userId = identity.subject;
+
+        const documents = await ctx.db
+            .query("documents")
+            .withIndex("by_user", (q) => q.eq("userId", userId))
+            .filter((q) => q.eq(q.field("isArchived"), true))
+            .order("desc")
+            .collect();
+
+        return documents;
+    },
+});
