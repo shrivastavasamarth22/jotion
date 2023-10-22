@@ -1,22 +1,28 @@
 "use client";
 
-import { ChevronsLeft, MenuIcon, PlusCircle, Search, Settings } from "lucide-react";
+import {
+    ChevronsLeft,
+    MenuIcon,
+    PlusCircle,
+    Search,
+    Settings,
+} from "lucide-react";
 import { ElementRef, useEffect, useRef, useState } from "react";
-import { useMutation, useQuery } from "convex/react";
 
+import DocumentList from "./document-list";
 import Item from "./item";
 import UserItem from "./user-item";
 import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
-import {toast} from 'sonner'
+import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
+import { useMutation } from "convex/react";
 import { usePathname } from "next/navigation";
 
 export const Navigation = () => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
-    const documents = useQuery(api.documents.get)
-    const create = useMutation(api.documents.create)
+    const create = useMutation(api.documents.create);
 
     const isResizingRef = useRef(false);
     const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -30,14 +36,14 @@ export const Navigation = () => {
         } else {
             resetWidth();
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMobile])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMobile]);
 
     useEffect(() => {
         if (isMobile) {
             collapse();
         }
-    }, [pathname, isMobile])
+    }, [pathname, isMobile]);
 
     const handleMouseDown = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -50,7 +56,7 @@ export const Navigation = () => {
         document.addEventListener("mouseup", handleMouseUp);
     };
 
-    const handleMouseMove =(event: MouseEvent) => {
+    const handleMouseMove = (event: MouseEvent) => {
         if (!isResizingRef.current) return;
 
         let newWidth = event.clientX;
@@ -61,15 +67,18 @@ export const Navigation = () => {
         if (sidebarRef.current && navbarRef.current) {
             sidebarRef.current.style.width = `${newWidth}px`;
             navbarRef.current.style.setProperty("left", `${newWidth}px`);
-            navbarRef.current.style.setProperty("width", `calc(100% - ${newWidth}px)`);
+            navbarRef.current.style.setProperty(
+                "width",
+                `calc(100% - ${newWidth}px)`
+            );
         }
-    }
+    };
 
     const handleMouseUp = () => {
         isResizingRef.current = false;
         document.removeEventListener("mousemove", handleMouseMove);
         document.removeEventListener("mouseup", handleMouseUp);
-    }
+    };
 
     const resetWidth = () => {
         if (sidebarRef.current && navbarRef.current) {
@@ -86,7 +95,7 @@ export const Navigation = () => {
             );
             setTimeout(() => setIsReseting(false), 300);
         }
-    }
+    };
 
     const collapse = () => {
         if (sidebarRef.current && navbarRef.current) {
@@ -97,19 +106,19 @@ export const Navigation = () => {
             navbarRef.current.style.setProperty("width", "100%");
             setTimeout(() => setIsReseting(false), 300);
         }
-    }
+    };
 
     const handleCreate = async () => {
         const promise = create({
-            title: "Untitled"
-        })
+            title: "Untitled",
+        });
 
         toast.promise(promise, {
-            loading: 'Creating a new note...',
-            success: 'New note created!',
-            error: 'Failed to create a new note.'
-        })
-    }
+            loading: "Creating a new note...",
+            success: "New note created!",
+            error: "Failed to create a new note.",
+        });
+    };
 
     return (
         <>
@@ -118,7 +127,7 @@ export const Navigation = () => {
                 className={cn(
                     "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
                     isReseting && "transition-all ease-in-out duration-300",
-                    isMobile && "w-0",
+                    isMobile && "w-0"
                 )}
             >
                 <div
@@ -129,9 +138,7 @@ export const Navigation = () => {
                     )}
                     onClick={collapse}
                 >
-                    <ChevronsLeft
-                        className="h-6 w-6"
-                    />
+                    <ChevronsLeft className="h-6 w-6" />
                 </div>
                 <div>
                     <UserItem />
@@ -141,19 +148,15 @@ export const Navigation = () => {
                         isSearch
                         onClick={() => {}}
                     />
+                    <Item label="Settings" icon={Settings} onClick={() => {}} />
                     <Item
-                        label="Settings"
-                        icon={Settings}
-                        onClick={() => {}}
+                        onClick={handleCreate}
+                        label="New page"
+                        icon={PlusCircle}
                     />
-                    <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
                 </div>
                 <div className="mt-4">
-                    {documents?.map(document => (
-                        <p key={document._id}>
-                            {document.title}
-                        </p>
-                    ))}
+                    <DocumentList />
                 </div>
                 <div
                     onMouseDown={handleMouseDown}
@@ -171,7 +174,13 @@ export const Navigation = () => {
                 )}
             >
                 <nav className="bg-transparent px-3 py-2 w-full">
-                    {isCollapsed && <MenuIcon onClick={resetWidth} className="h-6 w-6 text-muted-foreground" role="button"/>}
+                    {isCollapsed && (
+                        <MenuIcon
+                            onClick={resetWidth}
+                            className="h-6 w-6 text-muted-foreground"
+                            role="button"
+                        />
+                    )}
                 </nav>
             </div>
         </>
