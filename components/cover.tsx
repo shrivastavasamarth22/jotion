@@ -5,6 +5,7 @@ import { ImageIcon, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Id } from "@/convex/_generated/dataModel";
 import Image from "next/image";
+import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
 import { useCoverImage } from "@/hooks/use-cover-image";
@@ -81,5 +82,13 @@ export const Cover = ({
                 </div>
             )}
         </div>
+    )
+}
+
+Cover.Skeleton = function CoverSkeleton() {
+    return (
+        <Skeleton 
+            className="w-full h-[45vh]"
+        />
     )
 }

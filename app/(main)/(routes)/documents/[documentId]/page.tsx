@@ -2,6 +2,7 @@
 
 import { Cover } from "@/components/cover";
 import { Id } from "@/convex/_generated/dataModel";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Toolbar } from "@/components/toolbar";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
@@ -18,7 +19,27 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     });
 
     if (document === undefined) {
-        return <div>Loading...</div>;
+        return (
+            <div>
+                <Cover.Skeleton />
+                <div className="md:max-w-3xl lg:max-w-4xl mt-10">
+                    <div className="space-y-4 pl-8 pt-4">
+                        <Skeleton 
+                            className="h-14 w-[50%]"
+                        />
+                        <Skeleton 
+                            className="h-4 w-[80%]"
+                        />
+                        <Skeleton 
+                            className="h-4 w-[40%]"
+                        />
+                        <Skeleton 
+                            className="h-4 w-[60%]"
+                        />
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     if (document === null) {
