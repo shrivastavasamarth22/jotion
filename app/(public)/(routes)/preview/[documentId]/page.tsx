@@ -21,7 +21,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
 
     const document = useQuery(api.documents.getById, {
         documentId: params.documentId,
-    })
+    });
 
     const update = useMutation(api.documents.update)
 
@@ -66,14 +66,17 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
 
     return (
         <div className="pb-40">
-            <Cover 
+            <Cover
+                preview
                 url={document.coverImage}
             />
-            <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
-                <Toolbar 
+            <div className="md:max-w-3xl lg:max-w-4xl">
+                <Toolbar
+                    preview
                     initialData={document}
                 />
                 <Editor
+                    editable={false}
                     onChange={onChange}
                     initialContent={document.content}
                 />
