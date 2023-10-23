@@ -2,6 +2,7 @@
 
 import { Banner } from "./banner";
 import { Id } from "@/convex/_generated/dataModel";
+import { Menu } from "./menu";
 import { MenuIcon } from "lucide-react";
 import { Title } from "./title";
 import { api } from "@/convex/_generated/api";
@@ -43,6 +44,11 @@ const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
                     <Title 
                         initialData={document}
                     />
+                    <div className="flex items-center gap-x-2">
+                        <Menu 
+                            documentId={document._id}
+                        />
+                    </div>
                 </div>
             </nav>
             {document.isArchived && (
