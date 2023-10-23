@@ -1,5 +1,6 @@
 "use client";
 
+import { Banner } from "./banner";
 import { Id } from "@/convex/_generated/dataModel";
 import { MenuIcon } from "lucide-react";
 import { Title } from "./title";
@@ -44,6 +45,11 @@ const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
                     />
                 </div>
             </nav>
+            {document.isArchived && (
+                <Banner 
+                    documentId={document._id}
+                />
+            )}
         </>
     )
 };
