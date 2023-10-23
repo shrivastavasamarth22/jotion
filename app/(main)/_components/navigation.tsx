@@ -26,8 +26,10 @@ import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
 import { useMutation } from "convex/react";
 import { usePathname } from "next/navigation";
+import { useSearch } from "@/hooks/use-search";
 
 export const Navigation = () => {
+    const search = useSearch();
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
     const create = useMutation(api.documents.create);
@@ -154,7 +156,7 @@ export const Navigation = () => {
                         label="Search"
                         icon={Search}
                         isSearch
-                        onClick={() => {}}
+                        onClick={search.onOpen}
                     />
                     <Item label="Settings" icon={Settings} onClick={() => {}} />
                     <Item
