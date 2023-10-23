@@ -1,12 +1,13 @@
 "use client";
 
+import { useMutation, useQuery } from "convex/react";
+
 import { Cover } from "@/components/cover";
 import { Editor } from "@/components/editor";
 import { Id } from "@/convex/_generated/dataModel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Toolbar } from "@/components/toolbar";
 import { api } from "@/convex/_generated/api";
-import { useQuery } from "convex/react";
 
 interface DocumentIdPageProps {
     params: {
@@ -18,6 +19,15 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     const document = useQuery(api.documents.getById, {
         documentId: params.documentId,
     });
+
+    const update = useMutation(api.documents.update)
+
+    const onChange = (content: string) => {
+        update({
+            id: params.documentId,
+            content
+        })
+    }
 
     if (document === undefined) {
         return (
@@ -61,7 +71,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
                     initialData={document}
                 />
                 <Editor
-                    onChange={() => {}}
+                    onChange={onChange}
                     initialContent={document.content}
                 />
             </div>
