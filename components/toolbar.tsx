@@ -89,7 +89,7 @@ export const Toolbar = ({
                         variant="outline"
                         size="icon"
                     >
-                        <X 
+                        <X
                             className="h-4 w-4"
                         />
                     </Button>
