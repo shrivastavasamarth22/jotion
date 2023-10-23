@@ -98,9 +98,9 @@ export const Publish = ({ initialData }: PublishProps) => {
                                 value={url}
                                 disabled
                             />
-                            <Button
-                                onClick={onCopy}
-                                disabled={copied}
+                            <a
+                                href={url}
+                                target="_blank"
                                 className="h-8 rounded-l-none"
                             >
                                 {copied ? (
@@ -108,7 +108,7 @@ export const Publish = ({ initialData }: PublishProps) => {
                                 ) : (
                                     <Copy className="h-4 w-4" />
                                 )}
-                            </Button>
+                            </a>
                         </div>
                         <Button
                             size="sm"
