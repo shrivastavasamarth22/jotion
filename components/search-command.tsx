@@ -69,7 +69,7 @@ export const SearchCommand = () => {
                             key={doc._id}
                             value={`${doc._id}-${doc.title}`}
                             title={doc.title}
-                            onSelect={onSelect}
+                            onSelect={() => onSelect(doc._id)}
                         >
                             {doc.icon ? (
                                 <p className='mr-2 text-[18px]'>
