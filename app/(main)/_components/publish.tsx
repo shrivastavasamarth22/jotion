@@ -26,7 +26,9 @@ export const Publish = ({ initialData }: PublishProps) => {
     const [copied, setCopied] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const url = `${origin}/preview/${initialData._id}`;
+    const url = `${origin}/preview/${initialData._id}`
+
+    console.log(url);
 
     const onPublish = () => {
         setIsSubmitting(true);
@@ -60,6 +62,7 @@ export const Publish = ({ initialData }: PublishProps) => {
 
     const onCopy = () => {
         navigator.clipboard.writeText(url);
+        console.log(url);
         setCopied(true);
 
         setTimeout(() => {
