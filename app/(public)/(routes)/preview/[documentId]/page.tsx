@@ -82,7 +82,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
                     onChange={onChange}
                     initialContent={document.content}
                 />
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </div>
     )
