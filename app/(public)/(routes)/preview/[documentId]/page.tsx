@@ -3,6 +3,7 @@
 import { useMutation, useQuery } from "convex/react";
 
 import { Cover } from "@/components/cover";
+import {Footer} from "@/app/(public)/_components/Footer";
 import { Id } from "@/convex/_generated/dataModel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Toolbar } from "@/components/toolbar";
@@ -65,7 +66,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     }
 
     return (
-        <div className="pb-40 dark:bg-[#1f1f1f]">
+        <div className="pb-20 dark:bg-[#1f1f1f]">
             <Cover
                 preview
                 url={document.coverImage}
@@ -80,6 +81,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
                     onChange={onChange}
                     initialContent={document.content}
                 />
+                <Footer />
             </div>
         </div>
     )
