@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Doc } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
+import copy from "copy-to-clipboard";
 import { toast } from "sonner";
 import { useMutation } from "convex/react";
 import { useOrigin } from "@/hooks/use-origin";
@@ -59,7 +60,7 @@ export const Publish = ({ initialData }: PublishProps) => {
     };
 
     const onCopy = () => {
-        navigator.clipboard.writeText(url);
+        copy(url);
         console.log(url);
         setCopied(true);
 
