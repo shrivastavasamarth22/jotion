@@ -65,7 +65,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     }
 
     return (
-        <div className="pb-40">
+        <div className="pb-40 dark:bg-[#1f1f1f]">
             <Cover 
                 url={document.coverImage}
             />
