@@ -10,6 +10,7 @@ import { Toolbar } from "@/components/toolbar";
 import { api } from "@/convex/_generated/api";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
+import { useUser } from "@clerk/clerk-react";
 
 interface DocumentIdPageProps {
     params: {
