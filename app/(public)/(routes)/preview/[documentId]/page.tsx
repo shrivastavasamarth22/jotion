@@ -70,10 +70,10 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
                     />
                 </div>
             </div>
-            {/* <Footer 
+            <Footer 
                 userName={document.userName}
                 date={document._creationTime}
-            /> */}
+            />
         </div>
     );
 };
