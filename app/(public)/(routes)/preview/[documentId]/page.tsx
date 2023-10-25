@@ -48,7 +48,6 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
                         <Skeleton className="h-4 w-[60%]" />
                     </div>
                 </div>
-                <Skeleton className="h-4 w-[60%] mt-20" />
             </div>
         );
     }

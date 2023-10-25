@@ -30,7 +30,7 @@ export const Footer = ({ userName, date }: FooterProps) => {
     };
 
     return (
-        <div className="flex flex-col w-full h-[100%] items-end dark:bg-[#1f1f1f] pr-10 text-xs text-muted-foreground font-medium pb-4">
+        <div className="flex flex-col w-full items-end dark:bg-[#1f1f1f] pr-10 text-xs text-muted-foreground font-medium pb-4">
             <p className="mb-1.5">
                 By: <span className="font-semibold italic">{userName}</span>
             </p>
