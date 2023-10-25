@@ -48,6 +48,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
                         <Skeleton className="h-4 w-[60%]" />
                     </div>
                 </div>
+                <Skeleton className="h-4 w-[60%] mt-20" />
             </div>
         );
     }
@@ -57,17 +58,22 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     }
 
     return (
-        <div className="pb-20 dark:bg-[#1f1f1f]">
-            <Cover preview url={document.coverImage} />
-            <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
-                <Toolbar preview initialData={document} />
-                <Editor
-                    editable={false}
-                    onChange={onChange}
-                    initialContent={document.content}
-                />
-                {/* <Footer /> */}
+        <div className="flex flex-col min-h-[100%]">
+            <div className="dark:bg-[#1f1f1f] flex-grow">
+                <Cover preview url={document.coverImage} />
+                <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
+                    <Toolbar preview initialData={document} />
+                    <Editor
+                        editable={false}
+                        onChange={onChange}
+                        initialContent={document.content}
+                    />
+                </div>
             </div>
+            {/* <Footer 
+                userName={document.userName}
+                date={document._creationTime}
+            /> */}
         </div>
     );
 };
