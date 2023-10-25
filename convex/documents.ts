@@ -98,6 +98,7 @@ export const create = mutation({
             userId,
             isArchived: false,
             isPublished: false,
+            userName: identity.name,
         });
 
         return document;
