@@ -13,11 +13,6 @@ body,
   color: white;
 }
 
-span::selection {
-  background-color: #ffffff;
-  color: black;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
