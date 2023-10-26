@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { ImageIcon, X } from "lucide-react";
+import { ArrowLeft, ImageIcon, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Id } from "@/convex/_generated/dataModel";
@@ -12,83 +12,88 @@ import { useCoverImage } from "@/hooks/use-cover-image";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useMutation } from "convex/react";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface CoverImageProps {
     url?: string;
-    preview?: boolean; 
+    preview?: boolean;
 }
 
-export const Cover = ({
-    url,
-    preview
-}: CoverImageProps) => {
+export const Cover = ({ url, preview }: CoverImageProps) => {
+    const { edgestore } = useEdgeStore();
 
-    const {edgestore} = useEdgeStore();
-
+    const router = useRouter();
     const params = useParams();
     const coverImage = useCoverImage();
-    const removeCoverImage = useMutation(api.documents.removeCoverImage)
+    const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
     const onRemove = async () => {
         if (url) {
             await edgestore.publicFiles.delete({
-                url: url
-            })
+                url: url,
+            });
         }
 
         removeCoverImage({
-            id: params.documentId as Id<"documents">
-        }) 
-    }
+            id: params.documentId as Id<"documents">,
+        });
+    };
 
     return (
-        <div className={cn(
-            "relative w-full h-[45vh] group",
-            !url && "h-[8vh]",
-            url && "bg-muted"
-        )}>
+        <div
+            className={cn(
+                "relative w-full h-[45vh] group",
+                !url && "h-[8vh]",
+                url && "bg-muted"
+            )}
+        >
             {!!url && (
-                <Image 
-                   src={url}
-                   fill
-                   alt="Cover Image"
-                   className="object-cover"
+                <Image
+                    src={url}
+                    fill
+                    alt="Cover Image"
+                    className="object-cover"
                 />
             )}
-            {url && !preview && (
+            {!!url && !preview && (
                 <div className="opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2">
                     <Button
                         onClick={() => coverImage.onReplace(url)}
                         className="text-muted-foreground text-xs"
-                        variant='outline'
-                        size='sm'
+                        variant="outline"
+                        size="sm"
                     >
-                        <ImageIcon 
-                            className="h-4 w-4 mr-2"
-                        />
+                        <ImageIcon className="h-4 w-4 mr-2" />
                         Change cover
                     </Button>
                     <Button
                         onClick={onRemove}
                         className="text-muted-foreground text-xs"
-                        variant='outline'
-                        size='sm'
+                        variant="outline"
+                        size="sm"
                     >
-                        <X 
-                            className="h-4 w-4 mr-2"
-                        />
+                        <X className="h-4 w-4 mr-2" />
                         Remove
                     </Button>
                 </div>
             )}
+            {!!preview && (
+                <div className="opacity-0 group-hover:opacity-100 absolute top-5 left-5 flex items-center gap-x-2">
+                    <Button
+                        onClick={() => router.back()}
+                        className="text-muted-foreground text-xs"
+                        variant="outline"
+                        size="sm"
+                    >
+                        <ArrowLeft className="h-4 w-4 mr-2" />
+                        Back
+                    </Button>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
 Cover.Skeleton = function CoverSkeleton() {
-    return (
-        <Skeleton 
-            className="w-full h-[45vh]"
-        />
-    )
-}
+    return <Skeleton className="w-full h-[45vh]" />;
+};
