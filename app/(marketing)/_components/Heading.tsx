@@ -2,11 +2,11 @@
 
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import React from "react";
-import { useConvexAuth } from "convex/react";
-import { Spinner } from "@/components/spinner";
-import { SignInButton } from "@clerk/clerk-react"
 import Link from "next/link";
+import React from "react";
+import { SignInButton } from "@clerk/clerk-react"
+import { Spinner } from "@/components/spinner";
+import { useConvexAuth } from "convex/react";
 
 const Heading = () => {
     const { isAuthenticated, isLoading } = useConvexAuth();
@@ -14,7 +14,7 @@ const Heading = () => {
     return (
         <div className="max-w-3xl space-y-4">
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
-                Your Ideas, Documents, & Plans. Unified. Welcome to{" "}
+                Share your mind, one piece at a time. Welcome to{" "}
                 <span className="underline">Jotion</span>
             </h1>
             <h3 className="text-base sm:text-xl md:text-2xl font-medium">
