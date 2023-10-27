@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
+import { useConvexAuth } from "convex/react";
 import { useCoverImage } from "@/hooks/use-cover-image";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useMutation } from "convex/react";
@@ -21,6 +22,8 @@ interface CoverImageProps {
 
 export const Cover = ({ url, preview }: CoverImageProps) => {
     const { edgestore } = useEdgeStore();
+
+    const { isAuthenticated } = useConvexAuth();
 
     const router = useRouter();
     const params = useParams();
@@ -38,6 +41,14 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
             id: params.documentId as Id<"documents">,
         });
     };
+
+    const onBackClick = () => {
+        if (isAuthenticated) {
+            router.push("/documents");
+        } else {
+            router.push("/");
+        }
+    }
 
     return (
         <div
@@ -80,7 +91,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
             {!!preview && (
                 <div className="opacity-0 group-hover:opacity-100 absolute top-5 left-5 flex items-center gap-x-2">
                     <Button
-                        onClick={() => router.back()}
+                        onClick={onBackClick}
                         className="text-muted-foreground text-xs"
                         variant="outline"
                         size="sm"

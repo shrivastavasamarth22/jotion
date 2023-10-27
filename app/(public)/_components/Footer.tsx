@@ -2,6 +2,7 @@
 
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useConvexAuth } from "convex/react";
 import { useRouter } from "next/navigation";
 
 interface FooterProps {
@@ -11,6 +12,8 @@ interface FooterProps {
 
 export const Footer = ({ userName, date }: FooterProps) => {
     const router = useRouter();
+
+    const { isAuthenticated } = useConvexAuth();
 
     const creationDate = new Date(date);
 
@@ -35,11 +38,19 @@ export const Footer = ({ userName, date }: FooterProps) => {
         return `${dayStr} ${month} ${year}, ${hours}:${minutes} ${ampm}`;
     };
 
+    const onClick = () => {
+        if (isAuthenticated) {
+            router.push("/documents");
+        } else {
+            router.push("/");
+        }
+    }
+
     return (
         <div className="flex w-full justify-between dark:bg-[#1f1f1f] text-xs text-muted-foreground font-medium pb-4 px-10">
             <div className="flex items-center gap-x-2">
                 <Button
-                    onClick={() => router.back()}
+                    onClick={onClick}
                     className="text-muted-foreground text-xs"
                     variant="ghost"
                     size="sm"
