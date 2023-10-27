@@ -380,8 +380,57 @@ export const addTag = mutation({
             throw new Error("Unauthorized");
         }
 
+        // Do not allow more than 5 tags
+        if (existingDocument.tags?.length === 5) {
+            return existingDocument;
+        }
+
+        // Chek if tag is empty
+        if (!args.tag) {
+            return existingDocument;
+        }
+
+        // Check if tag already exists
+        if (existingDocument.tags?.includes(args.tag)) {
+            return existingDocument;
+        }
+
         const document = await ctx.db.patch(args.id, {
             tags: [...(existingDocument.tags || []), args.tag],
         });
+
+        return document;
+    }
+})
+
+export const removeTag = mutation({
+    args: {
+        id: v.id("documents"),
+        tag: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity) {
+            throw new Error("Unauthenticated");
+        }
+
+        const userId = identity.subject;
+
+        const existingDocument = await ctx.db.get(args.id);
+
+        if (!existingDocument) {
+            throw new Error("Not found");
+        }
+
+        if (existingDocument.userId !== userId) {
+            throw new Error("Unauthorized");
+        }
+
+        const document = await ctx.db.patch(args.id, {
+            tags: (existingDocument.tags || []).filter((t) => t !== args.tag),
+        });
+
+        return document;
     }
 })
