@@ -1,7 +1,7 @@
 "use client";
 
 import { ElementRef, useRef, useState } from "react";
-import { ImageIcon, PlusIcon, Smile, X } from "lucide-react";
+import { ImageIcon, PlusIcon, Smile, TagIcon, X } from "lucide-react";
 import {
     Popover,
     PopoverContent,
@@ -143,19 +143,38 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
                                 variant="outline"
                                 size="sm"
                             >
-                                <PlusIcon className="h-4 w-4 mr-2" />
+                                <TagIcon className="h-4 w-4 mr-2" />
                                 Add Tags
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent
-                            className="p-0 lg:w-72 md:w-64"
-                            side="right"
-                            sideOffset={8}
+                            className="p-0 w-72"
+                            side="bottom"
                         >
                             <TagBox documentId={initialData._id} />
                         </PopoverContent>
                     </Popover>
                 )}
+            </div>
+            <div className="mb-2 flex flex-wrap items-center gap-2 max-w-full">
+                {!preview
+                    ? initialData.tags.map((tag) => (
+                          <div
+                              key={tag}
+                              className="p-2 border border-muted-foreground text-xs font-medium text-muted-foreground flex items-center justify-center rounded-sm max-w-xs"
+                          >
+                              <span className="truncate">{tag.charAt(0).toUpperCase() + tag.slice(1)}</span>
+                              <X className="ml-2 h-4 w-4" role="button" onClick={() => onRemoveTag(tag)} />
+                          </div>
+                      ))
+                    : initialData.tags.map((tag) => (
+                        <div
+                            key={tag}
+                            className="p-1 border text-xs font-medium text-muted-foreground flex items-center justify-center rounded-sm max-w-xs"
+                        >
+                            <span className="truncate">{tag.charAt(0).toUpperCase() + tag.slice(1)}</span>
+                        </div>
+                    ))}
             </div>
             {isEditing && !preview ? (
                 <TextAreaAutoSize
@@ -174,19 +193,6 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
                     {initialData.title}
                 </div>
             )}
-            <div className="flex items-center gap-x-2">
-                {!preview
-                    ? initialData.tags.map((tag) => (
-                          <div
-                              key={tag}
-                              className="p-2 border text-sm font-medium text-muted-foreground flex items-center justify-center rounded-sm"
-                          >
-                              <span className="truncate">{tag}</span>
-                              <X className="ml-2 h-4 w-4" role="button" onClick={() => onRemoveTag(tag)} />
-                          </div>
-                      ))
-                    : null}
-            </div>
         </div>
     );
 };

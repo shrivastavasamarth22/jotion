@@ -25,7 +25,7 @@ const TagBox = ({
             event.preventDefault();
             const promise = addTag({
                 id: documentId,
-                tag
+                tag: tag.toLowerCase()
             });
             
             toast.promise(promise, {
@@ -43,7 +43,7 @@ const TagBox = ({
     }
 
     return (
-        <div className="text-sm bg-popover rounded-md pt-1 border">
+        <div className="text-sm bg-popover rounded-md border">
             <div className="p-2">
                 <Input
                     ref={inputRef}

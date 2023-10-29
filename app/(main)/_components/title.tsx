@@ -66,7 +66,7 @@ export const Title = ({ initialData }: TitleProps) => {
                     onClick={enableInput}
                     variant={"ghost"}
                     size="sm"
-                    className="font-normal h-auto p-1"
+                    className="font-normal h-auto p-1 w-40"
                 >
                     <span className="truncate">{initialData.title}</span>
                 </Button>
