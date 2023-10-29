@@ -99,6 +99,7 @@ export const create = mutation({
             isArchived: false,
             isPublished: false,
             userName: identity.name,
+            tags: [],
         });
 
         return document;

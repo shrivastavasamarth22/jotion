@@ -11,7 +11,7 @@ export default defineSchema({
         parentDocument: v.optional(v.id('documents')),
         content: v.optional(v.string()),
         coverImage: v.optional(v.string()),
-        tags: v.optional(v.array(v.string())),
+        tags: v.array(v.string()),
         icon: v.optional(v.string()),
         isPublished: v.boolean(),
     })
