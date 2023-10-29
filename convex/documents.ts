@@ -435,3 +435,16 @@ export const removeTag = mutation({
         return document;
     }
 })
+
+export const getPublished = query({
+    handler: async (ctx) => {
+        const documents = await ctx.db
+            .query("documents")
+            .withIndex("by_published", (q) => q.eq("isPublished", true))
+            .filter((q) => q.eq(q.field("isArchived"), false))
+            .order("desc")
+            .collect();
+
+        return documents;
+    },
+})
