@@ -2,6 +2,7 @@
 
 import {
     ChevronsLeft,
+    CompassIcon,
     MenuIcon,
     Plus,
     PlusCircle,
@@ -158,6 +159,11 @@ export const Navigation = () => {
                 </div>
                 <div>
                     <UserItem />
+                    <Item
+                        label="Explore"
+                        icon={CompassIcon}
+                        onClick={() => router.push("/explore")}
+                    />
                     <Item
                         label="Search"
                         icon={Search}
