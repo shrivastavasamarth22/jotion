@@ -20,7 +20,7 @@ export const Footer = ({ userName, date }: FooterProps) => {
 
     const onClick = () => {
         if (isAuthenticated) {
-            router.push("/documents");
+            router.back();
         } else {
             router.push("/");
         }

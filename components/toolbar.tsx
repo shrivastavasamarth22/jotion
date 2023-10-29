@@ -161,7 +161,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
                     ? initialData.tags.map((tag) => (
                           <div
                               key={tag}
-                              className="p-2 border border-muted-foreground text-xs font-medium text-muted-foreground flex items-center justify-center rounded-sm max-w-xs"
+                              className="p-2 border text-xs font-medium text-muted-foreground flex items-center justify-center rounded-sm max-w-xs"
                           >
                               <span className="truncate">{tag.charAt(0).toUpperCase() + tag.slice(1)}</span>
                               <X className="ml-2 h-4 w-4" role="button" onClick={() => onRemoveTag(tag)} />

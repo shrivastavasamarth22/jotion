@@ -44,7 +44,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
 
     const onBackClick = () => {
         if (isAuthenticated) {
-            router.push("/documents");
+            router.back();
         } else {
             router.push("/");
         }

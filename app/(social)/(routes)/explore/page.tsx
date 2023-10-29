@@ -1,5 +1,6 @@
 "use client";
 
+import { Article } from "../../_components/article";
 import { Spinner } from "@/components/spinner";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
@@ -17,13 +18,18 @@ const ExplorePage = () => {
         )
     }
 
+    if (documents === null) return null;
+
     return (
-        <div className="flex flex-col min-h-[100%] px-3 pt-20">
-            {documents?.map((document) => (
-                <p key={document._id}>
-                    {document.title}
-                </p>
-            ))}
+        <div className="dark:bg-[#1f1f1f] flex flex-col items-center min-h-[100%] pt-20 pb-10">
+            {
+                documents.map(doc => (
+                   <Article
+                        key={doc._id}
+                        document={doc}
+                   />
+                ))
+            }
         </div>
     );
 };
