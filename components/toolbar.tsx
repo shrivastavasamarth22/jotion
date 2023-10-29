@@ -148,7 +148,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent
-                            className="p-0 lg:w-72 md:w-64 mt-10 "
+                            className="p-0 lg:w-72 md:w-64"
                             side="right"
                             sideOffset={8}
                         >

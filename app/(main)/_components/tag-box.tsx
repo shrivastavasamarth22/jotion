@@ -1,14 +1,12 @@
 "use client";
 
-import { PlusIcon, Search } from "lucide-react";
 import { useMutation, useQuery } from "convex/react";
-import { useParams, useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
 import { Id } from "@/convex/_generated/dataModel";
 import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
-import { useState } from "react";
 
 interface TagBoxProps {
     documentId: Id<"documents">
@@ -17,12 +15,9 @@ interface TagBoxProps {
 const TagBox = ({
     documentId
 }: TagBoxProps) => {
-    const router = useRouter();
-    const params = useParams();
     const addTag = useMutation(api.documents.addTag);
-    const documents = useQuery(api.documents.getTrash);
-
     const [tag, setTag] = useState("");
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter" || event.key === "Tab") {
@@ -38,6 +33,12 @@ const TagBox = ({
                 success: "Tag added!",
                 error: "Failed to add tag"
             });
+
+            setTag("");
+
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
         }
     }
 
@@ -45,10 +46,11 @@ const TagBox = ({
         <div className="text-sm bg-popover rounded-md pt-1 border">
             <div className="p-2">
                 <Input
+                    ref={inputRef}
                     value={tag}
                     onChange={(e) => setTag(e.target.value)}
                     className="h-7 px-2 focus-visible:ring-transparent bg-secondary"
-                    placeholder="Press enter or tab to add tag"
+                    placeholder="Enter or tab to add tag"
                     onKeyDown={onKeyDown}
                 />
             </div>
