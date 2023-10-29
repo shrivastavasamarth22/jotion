@@ -43,7 +43,7 @@ const TagBox = ({
     }
 
     return (
-        <div className="text-sm bg-popover rounded-md border">
+        <div className="text-sm bg-popover rounded-md border border-popover">
             <div className="p-2">
                 <Input
                     ref={inputRef}

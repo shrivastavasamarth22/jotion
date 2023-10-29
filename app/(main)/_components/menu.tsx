@@ -10,7 +10,6 @@ import {
 import { MoreHorizontal, Trash } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { ConfirmModal } from "@/components/modals/confirm-modal";
 import { Id } from "@/convex/_generated/dataModel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";

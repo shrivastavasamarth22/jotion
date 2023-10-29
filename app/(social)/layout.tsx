@@ -1,10 +1,11 @@
 "use client";
 
+import Navbar  from "./_components/Navbar";
 import { Spinner } from "@/components/spinner";
 import { redirect } from "next/navigation";
 import { useConvexAuth } from "convex/react";
 
-const SocialLayout = ({children}: { children: React.ReactNode }) => {
+const SocialLayout = ({ children }: { children: React.ReactNode }) => {
     const { isAuthenticated, isLoading } = useConvexAuth();
 
     if (isLoading) {
@@ -20,12 +21,11 @@ const SocialLayout = ({children}: { children: React.ReactNode }) => {
     }
 
     return (
-        <div className="h-full flex dark:bg-[#1f1f1f]">
-            <main className="flex-1 h-full overflow-y-auto">
-                {children}
-            </main>
+        <div className="h-full dark:bg-[#1f1f1f]">
+            <Navbar />
+            {children}
         </div>
     );
-}
+};
 
 export default SocialLayout;
