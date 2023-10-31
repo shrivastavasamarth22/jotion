@@ -2,8 +2,9 @@
 
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { useConvexAuth } from "convex/react";
-import useDate from "@/hooks/use-date";
+import { useMediaQuery } from "usehooks-ts";
 import { useRouter } from "next/navigation";
 
 interface FooterProps {
@@ -18,6 +19,8 @@ export const Footer = ({ userName, date }: FooterProps) => {
 
     const creationDate = new Date(date);
 
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
     const onClick = () => {
         if (isAuthenticated) {
             router.back();
@@ -26,8 +29,32 @@ export const Footer = ({ userName, date }: FooterProps) => {
         }
     }
 
+    const useDate = (date: Date) => {
+        const day = date.getDate();
+        const month = date.toLocaleString("default", { month: "short" });
+        const year = date.getFullYear();
+        const hours = String(date.getHours() % 12).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+        const ampm = date.getHours() >= 12 ? "PM" : "AM";
+    
+        const dayStr =
+            day +
+            (day === 1 || day === 21 || day === 31
+                ? "st"
+                : day === 2 || day === 22
+                ? "nd"
+                : day === 3 || day === 23
+                ? "rd"
+                : "th");
+    
+        return `${dayStr} ${month} ${year}, ${hours}:${minutes} ${ampm}`;
+    };
+
     return (
-        <div className="flex w-full justify-between dark:bg-[#1f1f1f] text-xs text-muted-foreground font-medium pb-4 px-10">
+        <div className={cn(
+                "flex w-full justify-between dark:bg-[#1f1f1f] text-xs text-muted-foreground font-medium pb-4",
+                isMobile ? "px-5" : "px-10"
+            )}>
             <div className="flex items-center gap-x-2">
                 <Button
                     onClick={onClick}
@@ -39,9 +66,9 @@ export const Footer = ({ userName, date }: FooterProps) => {
                     Back
                 </Button>
             </div>
-            <div className="flex flex-col items-end">
+            <div className="flex flex-col items-end text-[10px]">
                 <p className="mb-1.5">
-                    By: <span className="font-semibold italic">{userName}</span>
+                    By: <span className="font-semibold italic truncate">{userName ? userName : "Jotion User"}</span>
                 </p>
                 <p>
                     Created at:{" "}

@@ -14,8 +14,10 @@ import { IconPicker } from "./icon-picker";
 import TagBox from "@/app/(main)/_components/tag-box";
 import TextAreaAutoSize from "react-textarea-autosize";
 import { api } from "@/convex/_generated/api";
+import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useCoverImage } from "@/hooks/use-cover-image";
+import { useMediaQuery } from "usehooks-ts";
 import { useMutation } from "convex/react";
 
 interface ToolbarProps {
@@ -33,6 +35,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     const removeTag = useMutation(api.documents.removeTag);
 
     const coverImage = useCoverImage();
+
+    const isMobile = useMediaQuery("(max-width: 768px)");
 
     const enableInput = () => {
         if (preview) return;
@@ -183,12 +187,15 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
                     onKeyDown={onKeyDown}
                     value={value}
                     onChange={(event) => onInput(event.target.value)}
-                    className="text-5xl md:pr-[15px] bg-transparent font-bold break-words outline-none text-[#3f3f3f] dark:text-[#cfcfcf] resize-none"
+                    className="text-5xl bg-transparent font-bold break-words outline-none text-[#3f3f3f] dark:text-[#cfcfcf] resize-none"
                 />
             ) : (
                 <div
                     onClick={enableInput}
-                    className="pb-[11.5px] md:pr-[15px] text-5xl font-bold break-words outline-none text-[#3f3f3f] dark:text-[#cfcfcf]"
+                    className={cn(
+                        "pb-[11.5px] text-5xl font-bold break-words outline-none text-[#3f3f3f] dark:text-[#cfcfcf]",
+                        isMobile && "pr-4"
+                    )}
                 >
                     {initialData.title}
                 </div>
