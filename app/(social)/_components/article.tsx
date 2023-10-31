@@ -74,20 +74,26 @@ export const Article = ({ document }: ArticleProps) => {
                 )}
             </div>
             <div className="flex flex-col justify-between items-end">
-                <Image
-                    src="/logo.svg"
-                    height="20"
-                    width="20"
-                    alt="Empty"
-                    className="dark:hidden"
-                />
-                <Image
-                    src="/logo-dark.svg"
-                    height="20"
-                    width="20"
-                    alt="Empty"
-                    className="dark:block hidden"
-                />
+                {!!document.icon ? (
+                    <p className="text-2xl">{document.icon}</p>
+                ) : (
+                    <>
+                        <Image
+                            src="/logo.svg"
+                            height="20"
+                            width="20"
+                            alt="Empty"
+                            className="dark:hidden"
+                        />
+                        <Image
+                            src="/logo-dark.svg"
+                            height="20"
+                            width="20"
+                            alt="Empty"
+                            className="dark:block hidden"
+                        />
+                    </>
+                )}
                 <div className="flex flex-col items-end justify-end text-[8px]">
                     <p>Created at:</p>
                     <span className="font-semibold italic">
