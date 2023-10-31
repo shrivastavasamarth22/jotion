@@ -38,7 +38,7 @@ export const Article = ({ document }: ArticleProps) => {
     return (
         <div
             className={cn(
-                "w-[90%] flex justify-between bg-muted rounded-lg px-5 mb-10 shadow-md",
+                "w-[90%] flex justify-between bg-gray-50 dark:bg-muted rounded-lg px-5 mb-10 shadow-md",
                 document.tags.length > 0 ? "py-4" : "h-28 py-4"
             )}
         >
@@ -94,7 +94,7 @@ export const Article = ({ document }: ArticleProps) => {
                         />
                     </>
                 )}
-                <div className="flex flex-col items-end justify-end text-[8px]">
+                <div className="flex flex-col items-end justify-end text-[9px]">
                     <p>Created at:</p>
                     <span className="font-semibold italic">
                         {useDate(creationDate)}
