@@ -14,12 +14,12 @@ export const Article = ({ document }: ArticleProps) => {
     const creationDate = new Date(document._creationTime);
 
     return (
-        <div className="w-[90%] flex flex-col justify-between pt-10 pb-4 bg-muted rounded-lg px-5 mb-10">
-            <h2 className="text-sm text-muted-foreground mb-1">
+        <div className="w-[90%] flex flex-col justify-between py-4 bg-muted rounded-lg px-5 mb-10">
+            <h2 className="text-sm text-muted-foreground">
                 By:{" "}
                 <span className="font-medium italic">{document.userName}</span>
             </h2>
-            <div className="flex flex-col">
+            <div className="flex flex-col max-w-[70%]">
                 <h1
                     role="button"
                     className="text-2xl font-semibold truncate mb-2"
@@ -27,7 +27,7 @@ export const Article = ({ document }: ArticleProps) => {
                 >
                     {document.title}
                 </h1>
-                <div className="flex items-center gap-x-2">
+                <div className="flex flex-wrap items-center gap-2 max-w-[80%]">
                     {document.tags.length > 0 &&
                         document.tags.map((tag) => (
                             <div
@@ -41,13 +41,11 @@ export const Article = ({ document }: ArticleProps) => {
                         ))}
                 </div>
             </div>
-            <div className="flex items-end justify-end text-xs">
-                <p>
-                    Created at:{" "}
-                    <span className="font-semibold italic">
-                        {useDate(creationDate)}
-                    </span>
-                </p>
+            <div className="flex flex-col items-end justify-end text-[8px]">
+                <p>Created at: </p>
+                <span className="font-semibold italic">
+                    {useDate(creationDate)}
+                </span>
             </div>
         </div>
     );

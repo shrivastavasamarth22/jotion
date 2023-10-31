@@ -159,11 +159,11 @@ export const Navigation = () => {
                 </div>
                 <div>
                     <UserItem />
-                    <Item
+                    {/* <Item
                         label="Explore"
                         icon={CompassIcon}
                         onClick={() => router.push("/explore")}
-                    />
+                    /> */}
                     <Item
                         label="Search"
                         icon={Search}
