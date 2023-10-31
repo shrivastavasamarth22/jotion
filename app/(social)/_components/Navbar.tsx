@@ -29,8 +29,8 @@ const Navbar = () => {
                     <h1 className="text-xl font-semibold">Explore Jotion</h1>
                 </div>
                 <div className="flex items-center gap-x-2">
-                    <UserButton />
                     <ModeToggle />
+                    <UserButton />
                 </div>
             </div>
         </div>
