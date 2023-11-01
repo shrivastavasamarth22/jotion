@@ -1,15 +1,12 @@
 "use client";
 
-import { useMutation, useQuery } from "convex/react";
-
 import { ArrowLeft } from "lucide-react";
 import { Article } from "@/app/(main)/_components/article";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Spinner } from "@/components/spinner";
 import { api } from "@/convex/_generated/api";
-import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
+import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
 
 interface UserPageProps {
