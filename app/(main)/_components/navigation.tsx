@@ -138,6 +138,14 @@ export const Navigation = () => {
         });
     };
 
+    const onExploreClick = () => {
+        if (isMobile) {
+            collapse();
+        }
+
+        router.push("/explore");
+    }
+
     return (
         <>
             <aside
@@ -163,7 +171,7 @@ export const Navigation = () => {
                     <Item
                         label="Explore"
                         icon={CompassIcon}
-                        onClick={() => { collapse(); router.push("/explore-test") }}
+                        onClick={onExploreClick}
                     />
                     <Item
                         label="Search"
@@ -217,7 +225,7 @@ export const Navigation = () => {
                 )}
             >
                 {
-                    pathname === "/explore-test" && (
+                    pathname === "/explore" && (
                         <NavbarExplore
                             isCollapsed={isCollapsed}
                             onResetWidth={resetWidth}
