@@ -3,6 +3,7 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import Image from "next/image";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
 import { useRouter } from "next/navigation";
@@ -115,3 +116,9 @@ export const Article = ({ document }: ArticleProps) => {
         </div>
     );
 };
+
+Article.Skeleton = function ArticleSkeleton () {
+    return (
+        <Skeleton className="w-full h-28" />
+    )
+}

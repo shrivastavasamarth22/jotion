@@ -32,12 +32,27 @@ const ExplorePage = () => {
     };
 
     if (documents === undefined) {
+        if (isMobile) {
+            return (
+                <div className="dark:bg-[#1f1f1f] flex flex-col items-center px-5 min-h-[100%] pt-20 pb-10 gap-y-10">
+                    <Article.Skeleton />
+                    <Article.Skeleton />
+                    <Article.Skeleton />
+                    <Article.Skeleton />
+                    <Article.Skeleton />
+                </div>
+            );
+        }
+
         return (
-            <div className="flex min-h-[100%] items-center justify-center">
-                <Spinner
-                    size="icon"
-                />
-        </div>
+            <div className="dark:bg-[#1f1f1f] flex flex-col items-center px-5 min-h-[100%] pt-20 pb-10">
+                <div className="grid grid-cols-2 gap-10 w-full">
+                    <Article.Skeleton />
+                    <Article.Skeleton />
+                    <Article.Skeleton />
+                    <Article.Skeleton />
+                </div>
+            </div>
         )
     }
 
