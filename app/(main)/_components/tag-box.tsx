@@ -19,7 +19,18 @@ const TagBox = ({
     const [tag, setTag] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = event.target.value;
+        const sanitizedValue = inputValue.replace(/\s/g, '');
+        setTag(sanitizedValue);
+    }
+
     const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === ' ') {
+            // Prevent input after space is pressed
+            event.preventDefault();
+        }
+
         if (event.key === "Enter" || event.key === "Tab") {
             event.stopPropagation();
             event.preventDefault();
@@ -43,12 +54,12 @@ const TagBox = ({
     }
 
     return (
-        <div className="text-sm bg-popover rounded-md border border-popover">
+        <div className="text-sm bg-popover rounded-md border border-popover shadow-md">
             <div className="p-2">
                 <Input
                     ref={inputRef}
                     value={tag}
-                    onChange={(e) => setTag(e.target.value)}
+                    onChange={onChange}
                     className="h-7 px-2 focus-visible:ring-transparent bg-secondary"
                     placeholder="Enter or tab to add tag"
                     onKeyDown={onKeyDown}

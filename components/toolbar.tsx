@@ -1,7 +1,7 @@
 "use client";
 
 import { ElementRef, useRef, useState } from "react";
-import { ImageIcon, PlusIcon, Smile, TagIcon, X } from "lucide-react";
+import { ImageIcon, Smile, TagIcon, X } from "lucide-react";
 import {
     Popover,
     PopoverContent,
@@ -115,7 +115,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
             {!!initialData.icon && preview && (
                 <p className="text-6xl pt-6">{initialData.icon}</p>
             )}
-            <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
+            <div className=" flex items-center gap-x-1 py-4">
                 {!initialData.icon && !preview && (
                     <IconPicker asChild onChange={onIconSelect}>
                         <Button
@@ -153,7 +153,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
                         </PopoverTrigger>
                         <PopoverContent
                             className="p-0 w-72"
-                            side="bottom"
+                            side={isMobile ? "top" : "right"}
+                            sideOffset={5}
                         >
                             <TagBox documentId={initialData._id} />
                         </PopoverContent>
