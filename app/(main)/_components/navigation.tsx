@@ -21,6 +21,7 @@ import { useParams, usePathname } from "next/navigation";
 import DocumentList from "./document-list";
 import Item from "./item";
 import Navbar from "./navbar";
+import NavbarExplore from "./navbar-explore";
 import TrashBox from "./trash-box";
 import UserItem from "./user-item";
 import { api } from "@/convex/_generated/api";
@@ -162,7 +163,7 @@ export const Navigation = () => {
                     <Item
                         label="Explore"
                         icon={CompassIcon}
-                        onClick={() => router.push("/explore")}
+                        onClick={() => { collapse(); router.push("/explore-test") }}
                     />
                     <Item
                         label="Search"
@@ -215,6 +216,14 @@ export const Navigation = () => {
                     isMobile && "w-full left-0"
                 )}
             >
+                {
+                    pathname === "/explore-test" && (
+                        <NavbarExplore
+                            isCollapsed={isCollapsed}
+                            onResetWidth={resetWidth}
+                        />
+                    )
+                }
                 {!!params.documentId ? (
                     <Navbar
                         isCollapsed={isCollapsed}
