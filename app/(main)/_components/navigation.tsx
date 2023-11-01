@@ -225,7 +225,7 @@ export const Navigation = () => {
                 )}
             >
                 {
-                    pathname === "/explore" && (
+                    pathname !== "/documents" && (
                         <NavbarExplore
                             isCollapsed={isCollapsed}
                             onResetWidth={resetWidth}

@@ -448,3 +448,20 @@ export const getPublished = query({
         return documents;
     },
 })
+
+export const getByUserId = query({
+    args: {
+        userId: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const documents = await ctx.db
+            .query("documents")
+            .withIndex("by_user", (q) => q.eq("userId", args.userId))
+            .filter((q) => q.eq(q.field("isArchived"), false))
+            .filter((q) => q.eq(q.field("isPublished"), true))
+            .order("desc")
+            .collect();
+
+        return documents;
+    }
+})

@@ -2,6 +2,7 @@
 
 import { Doc } from "@/convex/_generated/dataModel";
 import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
 import { useRouter } from "next/navigation";
@@ -49,9 +50,15 @@ export const Article = ({ document }: ArticleProps) => {
             <div className="flex flex-col w-[60%] justify-center">
                 <h2 className="text-xs text-muted-foreground mb-0.5">
                     By:{" "}
-                    <span className="font-semibold italic truncate">
-                        {document.userName ? document.userName : "Jotion User"}
-                    </span>
+                    <Link
+                        href={`/user/${document.userId}`}
+                    >
+                        <span className="font-semibold italic truncate">
+                            {document.userName
+                                ? document.userName
+                                : "Jotion User"}
+                        </span>
+                    </Link>
                 </h2>
                 <h1
                     role="button"
