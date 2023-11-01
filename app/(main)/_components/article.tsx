@@ -3,6 +3,7 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "usehooks-ts";
 import { useRouter } from "next/navigation";
 
 interface ArticleProps {
@@ -13,6 +14,8 @@ export const Article = ({ document }: ArticleProps) => {
     const router = useRouter();
 
     const creationDate = new Date(document._creationTime);
+
+    const isMobile = useMediaQuery("(max-width: 768px)");
 
     const useDate = (date: Date) => {
         const day = date.getDate();
@@ -38,8 +41,9 @@ export const Article = ({ document }: ArticleProps) => {
     return (
         <div
             className={cn(
-                "w-full flex justify-between bg-gray-50 dark:bg-muted rounded-lg px-5 mb-10 shadow-md",
-                document.tags.length > 0 ? "py-4" : "h-28 py-4"
+                "w-full flex justify-between bg-gray-50 dark:bg-muted rounded-lg px-5 shadow-md",
+                document.tags.length > 0 ? "py-4" : "h-28 py-4",
+                isMobile && "mb-10"
             )}
         >
             <div className="flex flex-col w-[60%] justify-center">

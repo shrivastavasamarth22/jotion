@@ -69,18 +69,35 @@ const ExplorePage = () => {
         );
     };
 
+    if (isMobile) {
+        return (
+            <div className="dark:bg-[#1f1f1f] flex flex-col items-center px-5 min-h-[100%] pt-20 pb-10">
+                {
+                    documents.map(doc => (
+                       <Article
+                            key={doc._id}
+                            document={doc}
+                       />
+                    ))
+                }
+            </div>
+        );
+    }
+
     return (
         <div className="dark:bg-[#1f1f1f] flex flex-col items-center px-5 min-h-[100%] pt-20 pb-10">
-            {
-                documents.map(doc => (
-                   <Article
-                        key={doc._id}
-                        document={doc}
-                   />
-                ))
-            }
+            <div className="grid grid-cols-2 gap-10 w-full">
+                {
+                    documents.map(doc => (
+                        <Article
+                            key={doc._id}
+                            document={doc}
+                        />
+                    ))
+                }
+            </div>
         </div>
-    );
+    )
 };
 
 export default ExplorePage;
