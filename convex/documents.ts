@@ -401,8 +401,8 @@ export const addTag = mutation({
         });
 
         return document;
-    }
-})
+    },
+});
 
 export const removeTag = mutation({
     args: {
@@ -433,8 +433,8 @@ export const removeTag = mutation({
         });
 
         return document;
-    }
-})
+    },
+});
 
 export const getPublished = query({
     handler: async (ctx) => {
@@ -447,7 +447,7 @@ export const getPublished = query({
 
         return documents;
     },
-})
+});
 
 export const getByUserId = query({
     args: {
@@ -463,5 +463,22 @@ export const getByUserId = query({
             .collect();
 
         return documents;
-    }
-})
+    },
+});
+
+export const getUserName = query({
+    args: {
+        userId: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const document = await ctx.db
+            .query("documents")
+            .withIndex("by_user", (q) => q.eq("userId", args.userId))
+            .filter((q) => q.eq(q.field("isArchived"), false))
+            .filter((q) => q.eq(q.field("isPublished"), true))
+            .order("desc")
+            .first();
+
+        return document?.userName;
+    },
+});

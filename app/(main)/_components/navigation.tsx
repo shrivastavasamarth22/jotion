@@ -22,6 +22,7 @@ import DocumentList from "./document-list";
 import Item from "./item";
 import Navbar from "./navbar";
 import NavbarExplore from "./navbar-explore";
+import NavbarUser from "./navbar-user";
 import TrashBox from "./trash-box";
 import UserItem from "./user-item";
 import { api } from "@/convex/_generated/api";
@@ -225,8 +226,16 @@ export const Navigation = () => {
                 )}
             >
                 {
-                    pathname !== "/documents" && (
+                    pathname === "/explore" && (
                         <NavbarExplore
+                            isCollapsed={isCollapsed}
+                            onResetWidth={resetWidth}
+                        />
+                    )
+                }
+                {
+                    pathname.includes('/user') && (
+                        <NavbarUser
                             isCollapsed={isCollapsed}
                             onResetWidth={resetWidth}
                         />
