@@ -16,7 +16,7 @@ import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
-import { useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/nextjs";
 
 interface MenuProps {
     documentId: Id<"documents">;

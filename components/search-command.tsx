@@ -15,7 +15,7 @@ import { api } from '@/convex/_generated/api'
 import { useQuery } from 'convex/react'
 import { useRouter } from 'next/navigation'
 import { useSearch } from '@/hooks/use-search'
-import { useUser } from '@clerk/clerk-react'
+import { useUser } from '@clerk/nextjs'
 
 export const SearchCommand = () => {
     const { user } = useUser();

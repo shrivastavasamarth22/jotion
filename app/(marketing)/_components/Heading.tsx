@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
-import { SignInButton } from "@clerk/clerk-react"
+import { SignInButton } from "@clerk/nextjs"
 import { Spinner } from "@/components/spinner";
 import { useConvexAuth } from "convex/react";
 
