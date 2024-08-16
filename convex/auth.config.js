@@ -1,8 +1,8 @@
 export default {
-    providers: [
-        {
-            domain: 'https://credible-marten-71.clerk.accounts.dev',
-            applicationID: "convex"
-        }
-    ]
+	providers: [
+		{
+			domain: "https://ready-krill-48.clerk.accounts.dev",
+			applicationID: "convex",
+		},
+	],
 };
